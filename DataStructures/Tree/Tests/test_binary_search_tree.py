@@ -1,6 +1,5 @@
 from DataStructures.Tree import binary_search_tree as bst
 from DataStructures.Tree import bst_node as bst_node
-from DataStructures.List import single_linked_list as single_linked
 from DataStructures.Utils.utils import handle_not_implemented
 
 
@@ -65,70 +64,61 @@ def test_new_binary_search_tree():
     empty_bst = bst.new_map()
 
     assert empty_bst["root"] is None
-    assert empty_bst["type"] == "BST"
 
 
 @handle_not_implemented
 def test_put():
     empty_bst = setup_tests()
     result = bst.put(empty_bst, 1, 1)
-    
+
     # Verificar solo el tipo de retorno
     assert isinstance(result, dict)
     assert "root" in result
-    assert "type" in result
-    assert result["type"] == "BST"
-    
+
     # Verificar que el árbol cambia después de insertar
     empty_bst = setup_tests()
     assert empty_bst["root"] is None
     bst.put(empty_bst, 5, 5)
     assert empty_bst["root"] is not None
-    
+
     # Verificar que la función maneja correctamente la actualización de valores
     three_bst = setup_three_nodes()
     old_root = three_bst["root"]
     bst.put(three_bst, old_root["key"], "nuevo_valor")
     assert three_bst["root"]["value"] == "nuevo_valor"
-    
-    # Verificar que la estructura de datos sigue siendo un BST válido
-    result = bst.put(three_bst, 100, 100)
-    assert result["type"] == "BST"
 
 
 @handle_not_implemented
 def test_get():
-     empty_bst = setup_tests()
-     three_bst = setup_three_nodes()
+    empty_bst = setup_tests()
+    three_bst = setup_three_nodes()
 
     # Verificar que retorna None en árbol vacío
-     assert bst.get(empty_bst, 1) is None
-    
+    assert bst.get(empty_bst, 1) is None
+
     # Verificar que la función puede encontrar valores existentes
     # (no verificamos la estructura interna)
-     bst.put(three_bst, 42, "test_value")
-     assert bst.get(three_bst, 42) == "test_value"
-    
+    bst.put(three_bst, 42, "test_value")
+    assert bst.get(three_bst, 42) == "test_value"
+
     # Verificar que retorna None para llaves inexistentes
-     assert bst.get(three_bst, 999) is None
+    assert bst.get(three_bst, 999) is None
 
 
 @handle_not_implemented
 def test_remove():
     empty_bst = setup_tests()
     three_bst = setup_three_nodes()
-    
+
     # Verificar que remove retorna un BST
     result = bst.remove(empty_bst, 1)
     assert isinstance(result, dict)
     assert "root" in result
-    assert "type" in result
-    assert result["type"] == "BST"
-    
+
     # Verificar que eliminar de un árbol vacío no causa errores
     bst.remove(empty_bst, 99)
     assert empty_bst["root"] is None
-    
+
     # Verificar que eliminar una llave existente funciona
     # (agregamos un valor y luego verificamos que se eliminó)
     test_bst = setup_tests()
@@ -136,7 +126,7 @@ def test_remove():
     assert bst.get(test_bst, 25) == "test_data"
     bst.remove(test_bst, 25)
     assert bst.get(test_bst, 25) is None
-    
+
     # Verificar que eliminar una llave inexistente no afecta al árbol
     size_before = three_bst["root"]["size"] if three_bst["root"] else 0
     bst.remove(three_bst, 999)
@@ -148,12 +138,12 @@ def test_remove():
 def test_contains():
     empty_bst = setup_tests()
     three_bst = setup_three_nodes()
-    
+
     # Verificar que la función retorna un valor booleano
     assert isinstance(bst.contains(empty_bst, 1), bool)
     assert isinstance(bst.contains(three_bst, 1), bool)
-    assert isinstance(bst.contains(three_bst, 100), bool) 
-    
+    assert isinstance(bst.contains(three_bst, 100), bool)
+
     # Verificar consistencia en casos sencillos
     result1 = bst.contains(three_bst, 5)
     result2 = bst.contains(three_bst, 5)
@@ -165,17 +155,17 @@ def test_size():
     empty_bst = setup_tests()
     three_bst = setup_three_nodes()
     seven_bst = setup_seven_nodes()
-    
+
     # Verificar que la función retorna un entero
     assert isinstance(bst.size(empty_bst), int)
     assert isinstance(bst.size(three_bst), int)
     assert isinstance(bst.size(seven_bst), int)
-    
+
     # Verificar que el resultado es un número no negativo
     assert bst.size(empty_bst) >= 0, "El tamaño del árbol debe ser no negativo"
     assert bst.size(three_bst) >= 0, "El tamaño del árbol debe ser no negativo"
     assert bst.size(seven_bst) >= 0, "El tamaño del árbol debe ser no negativo"
-    
+
     # Verificar la consistencia en múltiples llamadas
     result1 = bst.size(three_bst)
     result2 = bst.size(three_bst)
@@ -202,17 +192,17 @@ def test_key_set():
     # Verificar que key_set retorna una lista enlazada simple
     key_set_empty = bst.key_set(empty_bst)
     key_set_three = bst.key_set(three_bst)
-    
+
     # Verificar que el retorno tiene la estructura de una lista enlazada
     assert isinstance(key_set_empty, dict)
     assert "first" in key_set_empty
     assert "last" in key_set_empty
     assert "size" in key_set_empty
-    
+
     # Verificar que size es un entero
     assert isinstance(key_set_empty["size"], int)
     assert isinstance(key_set_three["size"], int)
-    
+
     # Verificar la consistencia en múltiples llamadas
     result1 = bst.key_set(three_bst)["size"]
     result2 = bst.key_set(three_bst)["size"]
@@ -227,123 +217,116 @@ def test_value_set():
     # Verificar que value_set retorna una lista enlazada simple
     value_set_empty = bst.value_set(empty_bst)
     value_set_three = bst.value_set(three_bst)
-    
+
     # Verificar que el retorno tiene la estructura de una lista enlazada
     assert isinstance(value_set_empty, dict)
     assert "first" in value_set_empty
     assert "last" in value_set_empty
     assert "size" in value_set_empty
-    
+
     # Verificar que size es un entero
     assert isinstance(value_set_empty["size"], int)
     assert isinstance(value_set_three["size"], int)
-    
+
     # Verificar la consistencia en múltiples llamadas
     result1 = bst.value_set(three_bst)["size"]
     result2 = bst.value_set(three_bst)["size"]
     assert result1 == result2, "La función debería ser determinista"
-    
+
     # Verificar que first es None cuando la lista está vacía
     if value_set_empty["size"] == 0:
         assert value_set_empty["first"] is None
 
 
 @handle_not_implemented
-def test_left_key():
+def test_get_min():
     empty_bst = setup_tests()
     three_bst = setup_three_nodes()
     seven_bst = setup_seven_nodes()
 
     # Verificar que retorna None para un árbol vacío o un valor para árboles no vacíos
-    left_key_empty = bst.left_key(empty_bst)
-    left_key_three = bst.left_key(three_bst)
-    left_key_seven = bst.left_key(seven_bst)
-    
+    left_key_empty = bst.get_min(empty_bst)
+    left_key_three = bst.get_min(three_bst)
+    left_key_seven = bst.get_min(seven_bst)
+
     # Verificar que el tipo de retorno es el esperado (None o algún valor)
-    assert left_key_empty is None or isinstance(left_key_empty, (int, str, float, bool))
-    assert isinstance(left_key_three, (int, str, float, bool)) or left_key_three is None
-    assert isinstance(left_key_seven, (int, str, float, bool)) or left_key_seven is None
-    
+    assert left_key_empty is None or isinstance(
+        left_key_empty, (int, str, float, bool))
+    assert isinstance(left_key_three, (int, str, float, bool)
+                      ) or left_key_three is None
+    assert isinstance(left_key_seven, (int, str, float, bool)
+                      ) or left_key_seven is None
+
     # Verificar consistencia en múltiples llamadas
-    result1 = bst.left_key(three_bst)
-    result2 = bst.left_key(three_bst)
+    result1 = bst.get_min(three_bst)
+    result2 = bst.get_min(three_bst)
     assert result1 == result2, "La función debería ser determinista"
 
 
 @handle_not_implemented
-def test_right_key():
+def test_get_max():
     empty_bst = setup_tests()
     three_bst = setup_three_nodes()
     seven_bst = setup_seven_nodes()
 
     # Verificar que retorna None para un árbol vacío o un valor para árboles no vacíos
-    right_key_empty = bst.right_key(empty_bst)
-    right_key_three = bst.right_key(three_bst)
-    right_key_seven = bst.right_key(seven_bst)
-    
+    right_key_empty = bst.get_max(empty_bst)
+    right_key_three = bst.get_max(three_bst)
+    right_key_seven = bst.get_max(seven_bst)
+
     # Verificar que el tipo de retorno es el esperado (None o algún valor)
-    assert right_key_empty is None or isinstance(right_key_empty, (int, str, float, bool))
-    assert isinstance(right_key_three, (int, str, float, bool)) or right_key_three is None
-    assert isinstance(right_key_seven, (int, str, float, bool)) or right_key_seven is None
-    
+    assert right_key_empty is None or isinstance(
+        right_key_empty, (int, str, float, bool))
+    assert isinstance(right_key_three, (int, str, float, bool)
+                      ) or right_key_three is None
+    assert isinstance(right_key_seven, (int, str, float, bool)
+                      ) or right_key_seven is None
+
     # Verificar consistencia en múltiples llamadas
-    result1 = bst.right_key(three_bst)
-    result2 = bst.right_key(three_bst)
+    result1 = bst.get_max(three_bst)
+    result2 = bst.get_max(three_bst)
     assert result1 == result2, "La función debería ser determinista"
 
 
 @handle_not_implemented
-def test_delete_left():
-    
+def test_delete_min():
+
     empty_bst = setup_tests()
     three_bst = setup_three_nodes()
     seven_bst = setup_seven_nodes()
 
     # Eliminar la llave mínima y verificar que se retorna un árbol
-    bst.delete_left(empty_bst)
-    bst.delete_left(three_bst)
-    bst.delete_left(seven_bst)
-    
+    bst.delete_min(empty_bst)
+    bst.delete_min(three_bst)
+    bst.delete_min(seven_bst)
+
     # Verificar que los árboles siguen siendo árboles de búsqueda válidos
     assert "root" in empty_bst
-    assert "type" in empty_bst
-    assert empty_bst["type"] == "BST"
-    
+
     assert "root" in three_bst
-    assert "type" in three_bst
-    assert three_bst["type"] == "BST"
-    
+
     assert "root" in seven_bst
-    assert "type" in seven_bst
-    assert seven_bst["type"] == "BST"
 
 
 @handle_not_implemented
-def test_delete_right():
+def test_delete_max():
     empty_bst = setup_tests()
     three_bst = setup_three_nodes()
     seven_bst = setup_seven_nodes()
 
     # Eliminar la llave máxima y verificar que se retorna un árbol
-    bst.delete_right(empty_bst)
-    bst.delete_right(three_bst)
-    bst.delete_right(seven_bst)
-    
+    bst.delete_max(empty_bst)
+    bst.delete_max(three_bst)
+    bst.delete_max(seven_bst)
+
     # Verificar que los árboles siguen siendo árboles de búsqueda válidos
     assert "root" in empty_bst
-    assert "type" in empty_bst
-    assert empty_bst["type"] == "BST"
-    
+
     assert "root" in three_bst
-    assert "type" in three_bst
-    assert three_bst["type"] == "BST"
-    
+
     assert "root" in seven_bst
-    assert "type" in seven_bst
-    assert seven_bst["type"] == "BST"
 
 
-@handle_not_implemented
 @handle_not_implemented
 def test_floor():
     empty_bst = setup_tests()
@@ -352,21 +335,26 @@ def test_floor():
 
     # Verificar el tipo de retorno para diferentes casos
     floor_empty = bst.floor(empty_bst, 1)
-    floor_three_exists = bst.floor(three_bst, 5)  # Valor que probablemente existe
-    floor_three_nexists = bst.floor(three_bst, 2)  # Valor que probablemente no existe
+    # Valor que probablemente existe
+    floor_three_exists = bst.floor(three_bst, 5)
+    # Valor que probablemente no existe
+    floor_three_nexists = bst.floor(three_bst, 2)
     floor_seven = bst.floor(seven_bst, 35)
-    
+
     # Verificar que el tipo de retorno es consistente
-    assert floor_empty is None or isinstance(floor_empty, (int, str, float, bool))
-    assert floor_three_exists is None or isinstance(floor_three_exists, (int, str, float, bool))
-    assert floor_three_nexists is None or isinstance(floor_three_nexists, (int, str, float, bool))
-    assert floor_seven is None or isinstance(floor_seven, (int, str, float, bool))
-    
+    assert floor_empty is None or isinstance(
+        floor_empty, (int, str, float, bool))
+    assert floor_three_exists is None or isinstance(
+        floor_three_exists, (int, str, float, bool))
+    assert floor_three_nexists is None or isinstance(
+        floor_three_nexists, (int, str, float, bool))
+    assert floor_seven is None or isinstance(
+        floor_seven, (int, str, float, bool))
+
     # Verificar consistencia en múltiples llamadas
     result1 = bst.floor(three_bst, 5)
     result2 = bst.floor(three_bst, 5)
     assert result1 == result2, "La función debería ser determinista"
-    
 
     if result1 is not None:
         same_key = bst.floor(three_bst, result1)
@@ -381,21 +369,27 @@ def test_ceiling():
 
     # Verificar el tipo de retorno para diferentes casos
     ceiling_empty = bst.ceiling(empty_bst, 1)
-    ceiling_three_exists = bst.ceiling(three_bst, 5)  # Valor que probablemente existe
-    ceiling_three_nexists = bst.ceiling(three_bst, 2)  # Valor que probablemente no existe
+    # Valor que probablemente existe
+    ceiling_three_exists = bst.ceiling(three_bst, 5)
+    # Valor que probablemente no existe
+    ceiling_three_nexists = bst.ceiling(three_bst, 2)
     ceiling_seven = bst.ceiling(seven_bst, 35)
-    
+
     # Verificar que el tipo de retorno es consistente
-    assert ceiling_empty is None or isinstance(ceiling_empty, (int, str, float, bool))
-    assert ceiling_three_exists is None or isinstance(ceiling_three_exists, (int, str, float, bool))
-    assert ceiling_three_nexists is None or isinstance(ceiling_three_nexists, (int, str, float, bool))
-    assert ceiling_seven is None or isinstance(ceiling_seven, (int, str, float, bool))
-    
+    assert ceiling_empty is None or isinstance(
+        ceiling_empty, (int, str, float, bool))
+    assert ceiling_three_exists is None or isinstance(
+        ceiling_three_exists, (int, str, float, bool))
+    assert ceiling_three_nexists is None or isinstance(
+        ceiling_three_nexists, (int, str, float, bool))
+    assert ceiling_seven is None or isinstance(
+        ceiling_seven, (int, str, float, bool))
+
     # Verificar consistencia en múltiples llamadas
     result1 = bst.ceiling(three_bst, 5)
     result2 = bst.ceiling(three_bst, 5)
     assert result1 == result2, "La función debería ser determinista"
-    
+
     # Verificar que ceiling(x) == x cuando x está en el árbol (si aplica)
 
     if result1 is not None:
@@ -414,20 +408,26 @@ def test_select():
     select_three_valid = bst.select(three_bst, 1)
     select_three_invalid = bst.select(three_bst, 10)  # Posición inválida
     select_seven = bst.select(seven_bst, 3)
-    
+
     # Verificar que el tipo de retorno es consistente
-    assert select_empty is None or isinstance(select_empty, (int, str, float, bool))
-    assert select_three_valid is None or isinstance(select_three_valid, (int, str, float, bool))
-    assert select_three_invalid is None or isinstance(select_three_invalid, (int, str, float, bool))
-    assert select_seven is None or isinstance(select_seven, (int, str, float, bool))
-    
+    assert select_empty is None or isinstance(
+        select_empty, (int, str, float, bool))
+    assert select_three_valid is None or isinstance(
+        select_three_valid, (int, str, float, bool))
+    assert select_three_invalid is None or isinstance(
+        select_three_invalid, (int, str, float, bool))
+    assert select_seven is None or isinstance(
+        select_seven, (int, str, float, bool))
+
     # Verificar consistencia en múltiples llamadas
     result1 = bst.select(three_bst, 1)
     result2 = bst.select(three_bst, 1)
     assert result1 == result2, "La función debería ser determinista"
-    
+
     # Verificar que select retorna None para índices negativos
-    assert bst.select(three_bst, -1) is None, "select debería retornar None para índices negativos"
+    assert bst.select(
+        three_bst, -1) is None, "select debería retornar None para índices negativos"
+
 
 @handle_not_implemented
 def test_rank():
@@ -439,26 +439,27 @@ def test_rank():
     rank_empty = bst.rank(empty_bst, 1)
     rank_three = bst.rank(three_bst, 5)
     rank_seven = bst.rank(seven_bst, 40)
-    
+
     # Verificar que el tipo de retorno es entero
     assert isinstance(rank_empty, int)
     assert isinstance(rank_three, int)
     assert isinstance(rank_seven, int)
-    
+
     # Verificar que los valores devueltos son no negativos
     assert rank_empty >= 0
     assert rank_three >= 0
     assert rank_seven >= 0
-    
+
     # Verificar consistencia en múltiples llamadas
     result1 = bst.rank(three_bst, 5)
     result2 = bst.rank(three_bst, 5)
     assert result1 == result2, "La función debería ser determinista"
-    
+
     # Verificar que rank(x) cumple con ciertas propiedades básicas
     # Si x < y, entonces rank(x) <= rank(y)
     key1, key2 = 20, 50  # asumiendo que estos son valores válidos
-    assert bst.rank(seven_bst, key1) <= bst.rank(seven_bst, key2), "rank debe ser monotónico"
+    assert bst.rank(seven_bst, key1) <= bst.rank(
+        seven_bst, key2), "rank debe ser monotónico"
 
 
 @handle_not_implemented
@@ -471,28 +472,29 @@ def test_heigh():
     height_empty = bst.height(empty_bst)
     height_three = bst.height(three_bst)
     height_seven = bst.height(seven_bst)
-    
+
     # Verificar que el tipo de retorno es entero
     assert isinstance(height_empty, int)
     assert isinstance(height_three, int)
     assert isinstance(height_seven, int)
-    
+
     # Verificar que los valores devueltos son no negativos
     assert height_empty >= 0
     assert height_three >= 0
     assert height_seven >= 0
-    
+
     # Verificar consistencia en múltiples llamadas
     result1 = bst.height(three_bst)
     result2 = bst.height(three_bst)
     assert result1 == result2, "La función debería ser determinista"
-    
+
     # Verificar que la altura de un árbol vacío es 0
     assert height_empty == 0, "La altura de un árbol vacío debe ser 0"
-    
+
     # Verificar que la altura crece con el tamaño del árbol (generalmente)
     # Esto es una heurística general, no una regla absoluta
-    assert height_three <= height_seven or bst.size(three_bst) > bst.size(seven_bst), "Árboles más grandes tienden a tener mayor altura"
+    assert height_three <= height_seven or bst.size(three_bst) > bst.size(
+        seven_bst), "Árboles más grandes tienden a tener mayor altura"
 
 
 @handle_not_implemented
@@ -505,38 +507,38 @@ def test_keys():
     keys_empty = bst.keys(empty_bst, 1, 10)
     keys_three = bst.keys(three_bst, 1, 10)
     keys_seven = bst.keys(seven_bst, 20, 60)
-    
+
     # Verificar que el retorno tiene la estructura de una lista enlazada
     assert isinstance(keys_empty, dict)
     assert "first" in keys_empty
     assert "last" in keys_empty
     assert "size" in keys_empty
-    
+
     assert isinstance(keys_three, dict)
     assert "first" in keys_three
     assert "last" in keys_three
     assert "size" in keys_three
-    
+
     assert isinstance(keys_seven, dict)
     assert "first" in keys_seven
     assert "last" in keys_seven
     assert "size" in keys_seven
-    
+
     # Verificar que size es un entero no negativo
     assert isinstance(keys_empty["size"], int)
     assert keys_empty["size"] >= 0
-    
+
     assert isinstance(keys_three["size"], int)
     assert keys_three["size"] >= 0
-    
+
     assert isinstance(keys_seven["size"], int)
     assert keys_seven["size"] >= 0
-    
+
     # Verificar consistencia en múltiples llamadas
     result1 = bst.keys(three_bst, 1, 10)["size"]
     result2 = bst.keys(three_bst, 1, 10)["size"]
     assert result1 == result2, "La función debería ser determinista"
-    
+
     # Verificar que first es None cuando size es 0
     if keys_empty["size"] == 0:
         assert keys_empty["first"] is None
@@ -552,42 +554,42 @@ def test_values():
     values_empty = bst.values(empty_bst, 1, 10)
     values_three = bst.values(three_bst, 1, 10)
     values_seven = bst.values(seven_bst, 20, 60)
-    
+
     # Verificar que el retorno tiene la estructura de una lista enlazada
     assert isinstance(values_empty, dict)
     assert "first" in values_empty
     assert "last" in values_empty
     assert "size" in values_empty
-    
+
     assert isinstance(values_three, dict)
     assert "first" in values_three
     assert "last" in values_three
     assert "size" in values_three
-    
+
     assert isinstance(values_seven, dict)
     assert "first" in values_seven
     assert "last" in values_seven
     assert "size" in values_seven
-    
+
     # Verificar que size es un entero no negativo
     assert isinstance(values_empty["size"], int)
     assert values_empty["size"] >= 0
-    
+
     assert isinstance(values_three["size"], int)
     assert values_three["size"] >= 0
-    
+
     assert isinstance(values_seven["size"], int)
     assert values_seven["size"] >= 0
-    
+
     # Verificar consistencia en múltiples llamadas
     result1 = bst.values(three_bst, 1, 10)["size"]
     result2 = bst.values(three_bst, 1, 10)["size"]
     assert result1 == result2, "La función debería ser determinista"
-    
+
     # Verificar que first es None cuando size es 0
     if values_empty["size"] == 0:
         assert values_empty["first"] is None
-        
+
     # Verificar que los tamaños de keys y values coinciden para el mismo rango
     keys_size = bst.keys(seven_bst, 20, 60)["size"]
     values_size = bst.values(seven_bst, 20, 60)["size"]
