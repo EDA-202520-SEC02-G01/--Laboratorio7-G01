@@ -110,6 +110,7 @@ Este programa se distribuye con la esperanza de que sea útil, pero SIN NINGUNA 
 - [Santiago Arteaga][phillipus85-url] es colaborador y administrador de repositorios.
 - [Luis Florez][le99-url] es colaborador y desarrolló los ejemplos y tutoriales para la librería.
 - [Lindsay Pinto][lindsayPinto-url] es colaborador y desarrolló la última versión de la actividad.
+- [Juan Castro][jpcastroa1-url] es colaborador y realizó la última actualización.
 
 [Volver al inicio](#laboratorio-7)
 
@@ -132,12 +133,6 @@ Este programa se distribuye con la esperanza de que sea útil, pero SIN NINGUNA 
 [issues-url]: https://github.com/ISIS1225DEVS/ISIS1225-Lib/issues
 [gnu-url]: http://www.gnu.org/licenses/
 
-<!-- contributors  -->
-
-[dariocorreal-url]: https://github.com/dariocorreal
-[phillipus85-url]: https://github.com/phillipus85
-[le99-url]: https://github.com/le99
-
 <!-- links for EDA laboratorio-7 lab repository -->
 
 [data-struc-url]: https://isis1225devs.github.io/ISIS1225-Structure-Documentation/
@@ -152,6 +147,7 @@ Este programa se distribuye con la esperanza de que sea útil, pero SIN NINGUNA 
 [phillipus85-url]: https://github.com/phillipus85
 [le99-url]: https://github.com/le99
 [lindsayPinto-url]: https://github.com/LindsayPinto
+[jpcastroa1-url]: https://github.com/jpcastroa1
 [laboratorio-7-contributors-shield]: https://img.shields.io/github/contributors/ISIS1225DEVS/ISIS1225-laboratorio-7.svg?style=for-the-badge
 [laboratorio-7-contributors-url]: https://github.com/ISIS1225DEVS/ISIS1225-laboratorio-7/graphs/contributors
 [laboratorio-7-forks-shield]: https://img.shields.io/github/forks/ISIS1225DEVS/ISIS1225-laboratorio-7.svg?style=for-the-badge
