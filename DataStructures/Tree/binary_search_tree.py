@@ -24,7 +24,7 @@ def get_node (node, k):
         respuesta = get_node(actual, k)
         return respuesta
     
-def new_bst():
+def new_map():
     bst={"root":None}
     return bst
 
