@@ -30,25 +30,23 @@ def new_map():
     bst={"root":None}
     return bst
 
-def put(bst,key,value):
-    bst["root"]=insert_node(bst["root"],key,value)
+def put(bst, key, value):
+    bst["root"] = insert_node(bst["root"], key, value)
+    return bst
 
-def insert_node(node,key,value):
+def insert_node(node, key, value):
     if node is None:
-        nuevo=nd.new_node(key,value)
+        nuevo = nd.new_node(key, value)
         return nuevo
     elif key == node["key"]:
-        node["value"]=value
+        node["value"] = value
         return node
     elif key < node["key"]:
-        actual=node["left"]
-        node["left"]=insert_node(actual,key,value)
-        node["size"]=size_tree(node["left"])+size_tree(node["right"])+1
-        return node
+        node["left"] = insert_node(node["left"], key, value)
     else:
-        actual=node["right"]
-        node["right"]=insert_node(actual,key,value)
-        node["size"]=size_tree(node["left"])+size_tree(node["right"])+1
+        node["right"] = insert_node(node["right"], key, value)
+    node["size"] = size_tree(node["left"]) + size_tree(node["right"]) + 1
+    return node
 
 def key_set_tree(root, my_list):
     if root is not None:
