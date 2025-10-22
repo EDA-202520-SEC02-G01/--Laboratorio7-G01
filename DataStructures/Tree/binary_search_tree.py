@@ -1,4 +1,5 @@
 from DataStructures.Tree import bst_node as nd
+from DataStructures.List import array_list as al
 
 def size(my_bst):
     return size_tree(my_bst["root"])
@@ -47,3 +48,16 @@ def insert_node(node,key,value):
         actual=node["right"]
         node["right"]=insert_node(actual,key,value)
         node["size"]=size_tree(node["left"])+size_tree(node["right"])+1
+
+def key_set_tree(root,my_list):
+    if root is not None:
+        key_set_tree(root["left"], my_list)
+        al.add_last(my_list,root["key"])
+        key_set_tree(root["right"], my_list)
+    return my_list
+
+
+def key_set(my_bst):
+    if my_bst is None or my_bst["root"] is None:
+        return []
+    return key_set_tree(my_bst["root"],al.new_list())
