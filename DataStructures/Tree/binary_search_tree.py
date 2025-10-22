@@ -56,7 +56,7 @@ def key_set_tree(root, my_list):
         key_set_tree(root["right"], my_list)
     return my_list
 
-def key_set_lt(my_bst):
+def key_set(my_bst):
     if my_bst is None or my_bst.get("root") is None:
         return al.add_last()
     return key_set_tree(my_bst["root"], al.new_list())
