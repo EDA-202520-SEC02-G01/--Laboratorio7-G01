@@ -59,3 +59,17 @@ def key_set(my_bst):
     if my_bst is None or my_bst.get("root") is None:
         return sl.new_list()
     return key_set_tree(my_bst["root"], sl.new_list())
+
+def get_max_node(root):
+    if root is None:
+        return None
+    while root["right"] is not None:
+        root = root["right"]
+    return root
+
+
+def get_max(bst):
+    if bst is None or bst["root"] is None:
+        return None
+    max_node = get_max_node(bst["root"])
+    return max_node["key"]
