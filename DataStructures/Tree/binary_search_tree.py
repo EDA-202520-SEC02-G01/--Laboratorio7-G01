@@ -4,7 +4,9 @@ def size(my_bst):
     return size_tree(my_bst["root"])
 
 def size_tree(root):
-    if root["left"]==None and root["right"]==None:
+    if root==None:
+        return 0
+    elif root["left"]==None and root["right"]==None:
         return 1
     elif root["left"]!= None and root["right"]!= None:
         return 1+size_tree(root["left"])+size_tree(root["right"])
@@ -12,8 +14,7 @@ def size_tree(root):
         return 1+size_tree(root["left"])
     elif root["left"]== None and root["right"]!= None:
         return 1+size_tree(root["right"])
-    elif root==None:
-        return 0
+        
 
 def get(my_bst,key):
     return get_node(my_bst["root"],key)
