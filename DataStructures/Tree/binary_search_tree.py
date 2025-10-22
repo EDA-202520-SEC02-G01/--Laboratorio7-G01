@@ -79,7 +79,10 @@ def height_tree(root):
         return 0
     left_height = height_tree(root["left"])
     right_height = height_tree(root["right"])
-    return max(left_height, right_height) + 1
+    if left_height>right_height:
+        return left_height+1
+    else:
+        return right_height+1
 
 
 def height(my_bst):
