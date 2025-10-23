@@ -52,7 +52,7 @@ def new_logic():
 
     analyzer['crimes'] = al.new_list()
     # TODO completar la creación del mapa ordenado
-    analyzer['dateIndex'] = bs.new_map()
+    analyzer['dateIndex'] = bst.new_map()
     
     return analyzer
 
@@ -164,7 +164,7 @@ def index_height(analyzer):
     Altura del arbol
     """
     # TODO Completar la función de consulta de altura del árbol
-    return bs.height(analyzer["dateIndex"])
+    return bst.height(analyzer["dateIndex"])
 
 
 def index_size(analyzer):
@@ -194,7 +194,7 @@ def max_key(analyzer):
     Llave mas grande
     """
     # TODO Completar la función de consulta de la llave máxima
-    pass
+    return bst.get_max(analyzer["dataIndex"])
 
 
 def get_crimes_by_range(analyzer, initialDate, finalDate):
@@ -202,7 +202,9 @@ def get_crimes_by_range(analyzer, initialDate, finalDate):
     Retorna el numero de crimenes en un rago de fechas.
     """
     # TODO Completar la función de consulta de crimenes por rango de fechas
-    pass
+    lst_dates = bst.keys(analyzer['dateIndex'], initialDate, finalDate)
+    return lst_dates["size"]
+    
 
 
 def get_crimes_by_range_code(analyzer, initialDate, offensecode):
@@ -211,4 +213,12 @@ def get_crimes_by_range_code(analyzer, initialDate, offensecode):
     de un tipo especifico.
     """
     # TODO Completar la función de consulta de crimenes por tipo de crimen en una fecha
-    pass
+    entry = bst.get(analyzer['dateIndex'], initialDate)
+    if entry is None:
+        return 0
+
+    offentry = lp.get(entry['offenseIndex'], offensecode)
+    if offentry is None:
+        return 0
+
+    return al.size(offentry['lstoffenses'])
