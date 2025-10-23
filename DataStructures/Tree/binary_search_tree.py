@@ -1,4 +1,6 @@
 from DataStructures.Tree import bst_node as nd
+from DataStructures.List import single_linked_list as sl
+
 
 def size(my_bst):
     return size_tree(my_bst["root"])
@@ -56,3 +58,50 @@ def insert_node(node,key,value):
         actual=node["right"]
         node["right"]=insert_node(actual,key,value)
         node["size"]=size_tree(node["left"])+size_tree(node["right"])+1
+
+def contains(my_bst, key):
+    if get(my_bst,key):
+        return True
+    else:
+        return False
+
+def value_set(my_bst):
+    lista=sl.new_list()
+    value_set_tree(my_bst["root"], lista)
+    return lista
+
+def value_set_tree(root, key_list):
+    if root!=None:
+        value_set_tree(root["left"], key_list)
+
+        sl.add_last(key_list, root["value"])
+
+        value_set_tree(root["right"], key_list)
+        
+def delete_min(my_bst):
+    if my_bst["root"]!=None:
+        my_bst["root"]=delete_min_tree(my_bst["root"])   
+    return my_bst
+
+def delete_min_tree(root):
+    if root["left"]==None:
+        return root["right"]
+    root["left"] = delete_min_tree(root["left"])
+    root["size"] = size_tree(root["left"]) + size_tree(root["right"]) + 1
+    return root
+    
+def keys(my_bst, key_initial, key_final):
+    lista=sl.new_list()
+    keys_range(my_bst["root"],key_initial,key_final,lista)
+    return lista
+    
+def keys_range(root, key_initial, key_final, list_key):
+    if root == None:
+        return 
+    if root["key"] > key_initial:
+        keys_range(root["left"], key_initial, key_final, list_key)
+    if key_initial <= root["key"] <= key_final:
+        sl.add_last(list_key, root["key"])
+    if root["key"] < key_final:
+        keys_range(root["right"], key_initial, key_final, list_key)
+    
