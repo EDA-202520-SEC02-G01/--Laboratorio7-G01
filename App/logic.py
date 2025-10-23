@@ -96,8 +96,8 @@ def update_date_index(map, crime):
     crimedate = datetime.datetime.strptime(occurreddate, '%Y-%m-%d %H:%M:%S')
     entry = bst.get(map, crimedate.date())
     if entry is None:
-        # TODO Realizar el caso en el que no se encuentra la fecha
-        pass
+        datentry = new_data_entry(crime)
+        bst.put(map, crimedate, datentry)
     else:
         datentry = entry
     add_date_index(datentry, crime)
@@ -171,8 +171,7 @@ def index_size(analyzer):
     """
     Numero de elementos en el indice
     """
-    # TODO Completar la función de consulta de tamaño del árbol
-    pass
+    return bst.size(analyzer["dateIndex"])
 
 
 def min_key(analyzer):
