@@ -52,7 +52,7 @@ def new_logic():
 
     analyzer['crimes'] = al.new_list()
     # TODO completar la creación del mapa ordenado
-    analyzer['dateIndex'] = None
+    analyzer['dateIndex'] = bs.new_map()
     
     return analyzer
 
@@ -164,7 +164,7 @@ def index_height(analyzer):
     Altura del arbol
     """
     # TODO Completar la función de consulta de altura del árbol
-    pass
+    return bs.height(analyzer["dateIndex"])
 
 
 def index_size(analyzer):

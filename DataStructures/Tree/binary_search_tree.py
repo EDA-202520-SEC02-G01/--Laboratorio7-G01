@@ -110,3 +110,34 @@ def values_range(node, low_key, high_key, result):
     if high_key > node["key"]:
         values_range(node["right"], low_key, high_key, result)
 
+
+
+def get_max_node(root):
+    if root is None:
+        return None
+    while root["right"] is not None:
+        root = root["right"]
+    return root
+
+
+def get_max(bst):
+    if bst is None or bst["root"] is None:
+        return None
+    max_node = get_max_node(bst["root"])
+    return max_node["key"]
+
+def height_tree(root):
+    if root is None:
+        return 0
+    left_height = height_tree(root["left"])
+    right_height = height_tree(root["right"])
+    if left_height>right_height:
+        return left_height+1
+    else:
+        return right_height+1
+
+
+def height(my_bst):
+    if my_bst is None or my_bst["root"] is None:
+        return 0
+    return height_tree(my_bst["root"])
