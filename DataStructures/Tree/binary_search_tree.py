@@ -146,13 +146,14 @@ def height_tree(root):
 
 
 def height(my_bst):
-    if my_bst is None or my_bst["root"] is None:
+    if my_bst is None:
         return 0
-    return height_tree(my_bst["root"])
-
-        actual=node["right"]
-        node["right"]=insert_node(actual,key,value)
-        node["size"]=size_tree(node["left"])+size_tree(node["right"])+1
+    left_height = height_tree(my_bst["left"])
+    right_height = height_tree(my_bst["right"])
+    if left_height>right_height:
+        return left_height+1
+    else:
+        return right_height+1
 
 def contains(my_bst, key):
     if get(my_bst,key):
