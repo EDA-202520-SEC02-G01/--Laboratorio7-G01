@@ -116,11 +116,11 @@ def add_date_index(datentry, crime):
     offenseIndex = datentry['offenseIndex']
     offentry = lp.get(offenseIndex, crime['OFFENSE_CODE_GROUP'])
     if (offentry is None):
-        # TODO Realice el caso en el que no se encuentre el tipo de crimen
-        pass
+        offentry = new_offense_entry(crime['OFFENSE_CODE_GROUP'], crime)
+        al.add_last(offentry['lstoffenses'], crime)
+        lp.put(offenseIndex, crime['OFFENSE_CODE_GROUP'], offentry)
     else:
-        # TODO Realice el caso en el que se encuentre el tipo de crimen
-        pass
+        al.add_last(offentry['lstoffenses'], crime)
     return datentry
 
 
@@ -179,8 +179,14 @@ def min_key(analyzer):
     """
     Llave mas pequena
     """
-    # TODO Completar la función de consulta de la llave mínima
-    pass
+    if analyzer is None or analyzer['dateIndex'] is None:
+        return None
+
+    min_tuple = bst.get_min(analyzer['dateIndex'])
+    if min_tuple is None:
+        return None
+
+    return min_tuple[0]
 
 
 def max_key(analyzer):
