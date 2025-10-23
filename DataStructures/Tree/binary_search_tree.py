@@ -6,8 +6,11 @@ def size(my_bst):
     return size_tree(my_bst["root"])
 
 def size_tree(root):
-    size=root["size"]
-    return size
+    # root is a bst_node or None
+    if root is None:
+        return 0
+    return root.get("size", 0)
+
 
 def get(my_bst,key):
     return get_node(my_bst["root"],key)
@@ -59,6 +62,55 @@ def key_set(my_bst):
     if my_bst is None or my_bst.get("root") is None:
         return sl.new_list()
     return key_set_tree(my_bst["root"], sl.new_list())
+
+def is_empty(my_bst):
+    return size(my_bst) == 0
+
+def get_min_node(node):
+    if node["left"] is None:
+        return node
+    else:
+        return get_min_node(node["left"])
+    
+def get_min(my_bst):
+    if my_bst is None or my_bst["root"] is None:
+        return None
+    min_node = get_min_node(my_bst["root"])
+    if min_node is None:
+        return None   
+    return (min_node["key"], min_node["value"])
+
+def delete_max_tree(node):
+    if node["right"] is None:
+        return node["left"]
+    node["right"] = delete_max_tree(node["right"])
+    node["size"] = size_tree(node["left"]) + size_tree(node["right"]) + 1
+    return node
+
+def delete_max(my_bst):
+    if my_bst is None or my_bst["root"] is None:
+        return my_bst
+    my_bst["root"] = delete_max_tree(my_bst["root"])
+    return my_bst
+
+def values(my_bst, low_key, high_key):
+    if my_bst is None or my_bst["root"] is None:
+        return al.new_list()
+    result = al.new_list()
+    values_range(my_bst["root"], low_key, high_key, result)
+    return result
+
+def values_range(node, low_key, high_key, result):
+    if node is None:
+        return
+    if low_key < node["key"]:
+        values_range(node["left"], low_key, high_key, result)
+    if low_key <= node["key"] <= high_key:
+        al.add_last(result, node["value"])
+    if high_key > node["key"]:
+        values_range(node["right"], low_key, high_key, result)
+
+
 
 def get_max_node(root):
     if root is None:

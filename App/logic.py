@@ -27,6 +27,9 @@
 import os
 import csv
 import datetime
+from DataStructures.Tree import binary_search_tree as bst
+from DataStructures.List import array_list as al
+from DataStructures.List import single_linked_list as sl
 from DataStructures.List import array_list as al
 from DataStructures.Tree import binary_search_tree as bs
 
